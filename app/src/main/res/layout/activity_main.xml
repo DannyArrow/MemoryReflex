@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="@color/bgColor"
     android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wallpapar"
+
     tools:context="reflex.buildappswithpaulo.com.reflex.MainActivity">
 
     <TextView
@@ -13,9 +14,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/chewy"
+        android:fontFamily="monospace"
         android:text="@string/high_score"
-        android:textSize="18sp" />
+        android:textAppearance="@android:style/TextAppearance.Material.Title"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/levelTextview"
@@ -27,7 +30,9 @@
         android:fontFamily="@font/chewy"
         android:gravity="right"
         android:text="@string/level"
-        android:textSize="18sp" />
+        android:textSize="25sp" />
+
+
 
     <TextView
         android:id="@+id/scoreTextView"
@@ -35,16 +40,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/highScoreTextView"
         android:layout_marginLeft="10dp"
-        android:fontFamily="@font/chewy"
         android:text="@string/score"
-        android:textSize="18sp" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <LinearLayout
         android:id="@+id/lifeLinearLayout"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp">
 
     </LinearLayout>
 </RelativeLayout>

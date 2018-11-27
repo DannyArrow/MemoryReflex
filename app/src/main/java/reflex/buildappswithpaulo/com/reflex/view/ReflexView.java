@@ -11,10 +11,10 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -88,7 +88,13 @@ public class ReflexView extends View {
     Toast toast = null;
     private int count = 0;
     private int count2 = 0;
-    private int xcolor;
+    private int randomnumber;
+    private String mode;
+    private LinearLayout layout2;
+    private LinearLayout layout3;
+
+    private LinearLayout parent;
+    public AlertDialog dialog;
 
 
     public ReflexView(Context context, SharedPreferences sharedPreferences, RelativeLayout parentLayout) {
@@ -155,12 +161,42 @@ public class ReflexView extends View {
 
     // called by the SpotOn Activity when it receives a call to onResume
     public void resume(Context context) {
+
         gamePaused = false;
         initializeSoundEffects(context); // initialize app's SoundPool
+             // resume the game
+              resume_game();
 
-        if (!dialogDisplayed)
-            resetGame(); // start the game
     } // end method resume
+
+    private void resume_game() {
+        if(dialog != null) {
+            parent = null;
+            dialog.dismiss();
+        }
+
+        livesLinearLayout.removeAllViews();
+        for (int i = 0; i < LIVES; i++) {
+            // add life indicator to screen
+            livesLinearLayout.addView(
+                    (ImageView) layoutInflater.inflate(R.layout.life, null));
+        }
+        for (int i = 0; i < check; i++){
+            score -= 10 * level;
+        }
+        spotsTouched = 0;
+        next = 0;
+        check = 0;
+        redorblue.clear();
+        animationTime = INITIAL_ANIMATION_DURATION;
+        cancelAnimations();
+        spots.clear();
+        animators.clear();
+        displayScores();
+
+        create_RandomCircle_dialog();
+
+    }
 
     // start a new game
     public void resetGame() {
@@ -200,64 +236,37 @@ public class ReflexView extends View {
                     (ImageView) layoutInflater.inflate(R.layout.life, null));
         } // end for
 
+        create_RandomCircle_dialog();
 
-        LinearLayout parent = new LinearLayout(getContext());
+
+        // add INITIAL_SPOTS new spots at SPOT_DELAY time intervals in ms
+
+    } // end method resetGame
+
+
+
+    private void create_RandomCircle_dialog(){
+         parent = new LinearLayout(getContext());
 
         parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         parent.setOrientation(LinearLayout.VERTICAL);
 
 
-        LinearLayout layout2 = new LinearLayout(getContext());
+        layout2 = new LinearLayout(getContext());
         layout2.setGravity(Gravity.CENTER_HORIZONTAL);
         layout2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        LinearLayout layout3 = new LinearLayout(getContext());
+        layout3 = new LinearLayout(getContext());
         layout3.setGravity(Gravity.CENTER_HORIZONTAL);
         layout3.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        for (int i = 0; i < level; i++) {
-            ImageView blocks =
-                    (ImageView) layoutInflater.inflate(R.layout.block_images, null);
-            xcolor = random.nextInt(3);
-
-            blocks.setImageResource(R.drawable.red_spot);
-
-            switch (xcolor){
-                case 0 :
-                    blocks.setColorFilter(Color.RED);
-                    break;
-
-                case 1 :
-                    blocks.setColorFilter(Color.BLACK);
-                    break;
-
-                case 2:
-                    blocks.setColorFilter(Color.YELLOW);
-                    break;
-
-            }
-            redorblue.add(xcolor);
-            Log.i("x =", String.valueOf(xcolor));
-            blocks.setLayoutParams(new RelativeLayout.LayoutParams(SPOT_DIAMETER, SPOT_DIAMETER));
-            layout2.addView(blocks);
-
-            if (i == 8) {
-                for (int j = 0; j < level; j++) {
-
-                    ImageView blocks1 =
-                            (ImageView) layoutInflater.inflate(R.layout.block_images, null);
-                    int x2 = random.nextInt(2);
-                    blocks1.setImageResource(x2 == 0 ?
-                            R.drawable.green_spot : R.drawable.red_spot);
-                    redorblue.add(x2);
-                    blocks1.setLayoutParams(new RelativeLayout.LayoutParams(SPOT_DIAMETER, SPOT_DIAMETER));
-                    layout3.addView(blocks1);
-                }
-            }
-        }
+        // sets the number of color circle to layout2 and layout3
+        setblocks();
         parent.addView(layout2);
 
         parent.addView(layout3);
+
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(parent);
@@ -274,11 +283,59 @@ public class ReflexView extends View {
 
             }
         });
-        builder.show();
 
-        // add INITIAL_SPOTS new spots at SPOT_DELAY time intervals in ms
+         dialog = builder.create();
 
-    } // end method resetGame
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+
+        dialog.show();
+
+    }
+
+    private void setblocks() {
+
+
+        for (int i = 0; i < level; i++) {
+            ImageView blocks =
+                    (ImageView) layoutInflater.inflate(R.layout.block_images, null);
+            blocks.setImageResource(R.drawable.red_spot);
+            blocks.setLayoutParams(new RelativeLayout.LayoutParams(SPOT_DIAMETER, SPOT_DIAMETER));
+            if(i<8) {
+                set_color_to_circler(blocks);
+                layout2.addView(blocks); // is the first line of circle display in the dialog
+            }
+            else {
+                for (int j = level-1; j < level; j++) {
+                    set_color_to_circler(blocks);
+                    layout3.addView(blocks); // is the second line of circle display in the dialog
+                }
+            }
+        }
+    }
+
+    private void set_color_to_circler(ImageView circle){
+        randomnumber = random.nextInt(4);
+        switch (randomnumber) {
+            case 0:
+                circle.setColorFilter(Color.RED);
+                break;
+
+            case 1:
+                circle.setColorFilter(Color.BLACK);
+                break;
+
+            case 2:
+                circle.setColorFilter(Color.YELLOW);
+                break;
+            case 3:
+                circle.setColorFilter(Color.BLUE);
+                break;
+
+        }
+        redorblue.add(randomnumber);
+    }
 
     // create the app's SoundPool for playing game audio
     private void initializeSoundEffects(Context context) {
@@ -336,17 +393,21 @@ public class ReflexView extends View {
         spot.setLayoutParams(new RelativeLayout.LayoutParams(
                 SPOT_DIAMETER, SPOT_DIAMETER));
         spot.setImageResource(R.drawable.red_spot);
+
         switch (redorblue.get(next)){
-            case 0 :
+            case 0:
                 spot.setColorFilter(Color.RED);
                 break;
 
-            case 1 :
+            case 1:
                 spot.setColorFilter(Color.BLACK);
                 break;
 
             case 2:
                 spot.setColorFilter(Color.YELLOW);
+                break;
+            case 3:
+                spot.setColorFilter(Color.BLUE);
                 break;
 
         }
@@ -446,7 +507,29 @@ public class ReflexView extends View {
             }
         }
 
-    } // end method touchedSpot
+    }
+/*
+    public void showmodedialog(){
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setTitle("Game Mode:");
+        alert.setNeutralButton("Easy Mode", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mode = "easy";
+            }
+        });
+
+        alert.setNeutralButton("Hard Mode", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mode = "hard";
+
+            }
+        });
+    }
+
+    // end method touchedSpot
 
     // called when a spot finishes its animation without being touched
 
@@ -501,6 +584,7 @@ public class ReflexView extends View {
 
              // end method missedSpot
          }
+         */
 
     }
 
