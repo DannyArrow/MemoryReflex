@@ -27,7 +27,8 @@ initial
    
   </br>
   </br>
-  </hr>
+  
+  <hr>
    <p> The balls gets smaller every passing seconds until it dissaperd. Once the balls dissapper you have to start over to level 2 </p>
     <img src="https://doc-0k-5s-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/d73ovavfribdkn7p0fo3gfrerevlvr1g/1543500000000/00936450897465557692/*/1_n-IJE-4py3HmluZRLjRDZkRFg9cRZsZ" alt="Smiley face" height="350" width="650">
    <img src="https://doc-0s-5s-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/r5apejst2i9mp08amkjc4kikoaomrsu9/1543507200000/00936450897465557692/*/1yiGqfjt_i4O1kY57h5b6bh1L4lZ-fD-1" alt="Smiley face" height="350" width="650">
