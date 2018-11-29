@@ -22,7 +22,7 @@ initial
      </ul>
      
      
-   <h3> When you start the Game, you on level 2, which means you have to memorize 2 colors. If you get it correct, you move on to level 3, then you have to memorize 3 colors. Each level, a extra sequence of color gets added, thus making the game challenging</h3>
+   <h4> When you start the Game, you on level 2, which means you have to memorize 2 colors. If you get it correct, you move on to level 3, then you have to memorize 3 colors. Each level, a extra sequence of color gets added, thus making the game challenging</h4>
    <img src="https://drive.google.com/file/d/1_aCQT3Mxby2gMCgzbwT6fF6UZWtA9jsH/view?usp=sharing" alt="Smiley face" height="42" width="42">
 
      
