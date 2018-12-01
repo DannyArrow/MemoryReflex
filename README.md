@@ -36,7 +36,7 @@ initial
   
 <h2> Animated Gif of the app <h2>
   <p> if you get the sequence incorrect three times the game will restart to level 2. </p>
-   <img src="https://i.imgur.com/p1ikcfFb.gif" title="source: imgur.com" />
+   <img src="https://s2.gifyu.com/images/ezgif.com-gif-makerd6fcedba3d12df72.gif" alt="ezgif.com-gif-makerd6fcedba3d12df72.gif" border="0" />
      
      
      
