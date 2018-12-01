@@ -29,14 +29,14 @@ initial
   </br>
   
 
-   <p> The balls gets smaller every passing seconds until it dissaperd. Once the balls dissapper you have to start over to level 2 </p>
-    <img src="https://doc-0k-5s-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/d73ovavfribdkn7p0fo3gfrerevlvr1g/1543500000000/00936450897465557692/*/1_n-IJE-4py3HmluZRLjRDZkRFg9cRZsZ" alt="Smiley face" height="350" width="650">
-   <img src="https://doc-0s-5s-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/r5apejst2i9mp08amkjc4kikoaomrsu9/1543507200000/00936450897465557692/*/1yiGqfjt_i4O1kY57h5b6bh1L4lZ-fD-1" alt="Smiley face" height="350" width="650">
+   <p> The balls gets smaller every passing seconds until it dissaperd. Once the balls dissapper, or you choose the wrong balls more then 3 times you have to start over to level 2 </p>
+    <img src="https://www.dropbox.com/s/hd354pp42w3t2hy/20181130_152821.jpg?raw=1" alt="Smiley face" height="350" width="650">
+   <img src="https://www.dropbox.com/s/pquqbiif2g572jk/20181130_152842.jpg?raw=1" alt="Smiley face" height="350" width="650">
    
   
 <h2> Animated Gif of the app <h2>
   <p> if you get the sequence incorrect three times the game will restart to level 2. </p>
-   <img src="https://doc-0k-5s-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/cedjr2b46k02f22lpp4cr3jdq6gjr43d/1543507200000/00936450897465557692/*/1ViqAykHFPVUcMpIHok6MYEYRvwqns-QJ" alt="Smiley face" height="350" width="650">
+   <img src="https://www.dropbox.com/s/b58co83c174sjq8/20181129_092720.gif?raw=1" alt="Smiley face" height="350" width="650">
  
      
      
