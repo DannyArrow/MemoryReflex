@@ -1,4 +1,4 @@
-package reflex.buildappswithpaulo.com.reflex.view;
+package reflex.memorygame.com.reflex.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -28,14 +28,11 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-import reflex.buildappswithpaulo.com.reflex.R;
+import reflex.memorygame.com.reflex.R;
 
-/**
- * Created by paulodichone on 11/9/17.
- */
 
 public class ReflexView extends View {
-    public static final int INITIAL_ANIMATION_DURATION = 12000; //12 SECOND
+    public static final int INITIAL_ANIMATION_DURATION = 15000; //15 SECOND
     public static final Random random = new Random();
     public static final int SPOT_DIAMETER = 200;
     public static final float SCALE_X = 0.25f;
@@ -114,8 +111,6 @@ public class ReflexView extends View {
 
         //Setup UI components
         relativeLayout = parentLayout;
-        // alert = relativeLayout.findViewById(R.id.alert);
-
         livesLinearLayout = relativeLayout.findViewById(R.id.lifeLinearLayout);
         highScoreTextView = relativeLayout.findViewById(R.id.highScoreTextView);
         currentScoreTextView = relativeLayout.findViewById(R.id.scoreTextView);
@@ -169,35 +164,43 @@ public class ReflexView extends View {
 
     } // end method resume
 
+    // resume game method restard the game to the current level of the game with different sequence of colors spot
     private void resume_game() {
         if(dialog != null) {
             parent = null;
             dialog.dismiss();
         }
 
+
+        // reset score to the begining of the level
+        for (int i = 0; i < check; i++){
+            score -= 10 * level;
+        }
+
+         clear_gameToDefault();
+        create_RandomCircle_dialog();
+
+    }
+    public void clear_gameToDefault(){
         livesLinearLayout.removeAllViews();
         for (int i = 0; i < LIVES; i++) {
             // add life indicator to screen
             livesLinearLayout.addView(
                     (ImageView) layoutInflater.inflate(R.layout.life, null));
         }
-        for (int i = 0; i < check; i++){
-            score -= 10 * level;
-        }
-        spotsTouched = 0;
+
         next = 0;
         check = 0;
         redorblue.clear();
-        animationTime = INITIAL_ANIMATION_DURATION;
         cancelAnimations();
-        spots.clear();
-        animators.clear();
+        spots.clear(); // empty the List of spots
+        animators.clear(); // empty the List of Animators
+
+        animationTime = INITIAL_ANIMATION_DURATION; // init animation length
+        spotsTouched = 0; // reset the number of spots touched
         displayScores();
 
-        create_RandomCircle_dialog();
-
     }
-
     // start a new game
     public void resetGame() {
         if (score > highScore) {
@@ -210,31 +213,18 @@ public class ReflexView extends View {
             score = 0;
             level = 2;
         }
+        clear_gameToDefault();
         displayScores();
         gamePaused = false;
         count2 = 0;
         count = 0;
         coundownofspot = level;
-        next = 0;
-        check = 0;
-        redorblue.clear();
-        cancelAnimations();
-        spots.clear(); // empty the List of spots
-        animators.clear(); // empty the List of Animators
-        livesLinearLayout.removeAllViews(); // clear old lives from screen
 
-        animationTime = INITIAL_ANIMATION_DURATION; // init animation length
-        spotsTouched = 0; // reset the number of spots touched
         // reset the level
         gameOver = true; // the game is not over
-        displayScores(); // display scores and level
 
-        // add lives
-        for (int i = 0; i < LIVES; i++) {
-            // add life indicator to screen
-            livesLinearLayout.addView(
-                    (ImageView) layoutInflater.inflate(R.layout.life, null));
-        } // end for
+
+
 
         create_RandomCircle_dialog();
 
@@ -294,6 +284,7 @@ public class ReflexView extends View {
 
     }
 
+    // genearate a random color of spots or circle thats going be display in the dialog.
     private void setblocks() {
 
 
@@ -508,83 +499,7 @@ public class ReflexView extends View {
         }
 
     }
-/*
-    public void showmodedialog(){
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-        alert.setTitle("Game Mode:");
-        alert.setNeutralButton("Easy Mode", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mode = "easy";
-            }
-        });
-
-        alert.setNeutralButton("Hard Mode", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mode = "hard";
-
-            }
-        });
-    }
-
-    // end method touchedSpot
-
-    // called when a spot finishes its animation without being touched
-
-    public void missedSpot(ImageView spot) {
-
-//             // play the disappear sound effect
-//             if (soundPool != null) {
-//                 soundPool.play(DISAPPEAR_SOUND_ID, volume, volume,
-//                         SOUND_PRIORITY, 0, 1f);
-//
-//             }
-//             // if the game has been lost
-//
-//
-//             // if the last game's score is greater than the high score
-//             if (score > highScore) {
-//                 SharedPreferences.Editor editor = preferences.edit();
-//                 editor.putInt(HIGH_SCORE, score);
-//                 editor.apply(); // store the new high score
-//                 highScore = score;
-//             }
-//             gameOver = false;
-
-             // end if
-
-//            cancelAnimations();
-//
-//            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//            builder.setTitle("Game Over");
-//            builder.setMessage("Score: " + score);
-//            builder.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//                    displayScores();
-//                    dialogDisplayed = false;
-//                    resetGame();
-//
-//                }
-//            });
-//            dialogDisplayed = true;
-//            builder.show();
-//
-//
-//
-//
-//        }else {
-//            livesLinearLayout.removeViewAt(
-//                    livesLinearLayout.getChildCount() - 1
-//            );
-//            addNewSpot();
-//        }
-
-             // end method missedSpot
-         }
-         */
 
     }
 
