@@ -31,7 +31,7 @@ initial
 
    <p> The balls gets smaller every passing seconds until it dissaperd. Once the balls dissapper, or you choose the wrong balls more then 3 times you have to start over to level 2 </p>
     <img src="https://www.dropbox.com/s/hd354pp42w3t2hy/20181130_152821.jpg?raw=1" alt="Smiley face" height="350" width="650">
-   <img src="https://i.imgur.com/myIrCCB.gif" alt="Smiley face" height="350" width="650">
+   <img src="https://www.dropbox.com/s/pquqbiif2g572jk/20181130_152842.jpg?raw=1" alt="Smiley face" height="350" width="650">
    
   
 <h2> Animated Gif of the app <h2>
