@@ -37,6 +37,8 @@ initial
 <h2> Animated Gif of the app <h2>
   <p> if you get the sequence incorrect three times the game will restart to level 2. </p>
   ![github](https://user-images.githubusercontent.com/25344161/49332336-9980c080-f579-11e8-9127-34d20345dbb8.gif)
+     <img src="https://user-images.githubusercontent.com/25344161/49332336-9980c080-f579-11e8-9127-34d20345dbb8.gif" alt="Smiley face" height="350" width="650">
+
      
      
      
