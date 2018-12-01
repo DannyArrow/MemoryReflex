@@ -1,4 +1,4 @@
-package reflex.buildappswithpaulo.com.reflex;
+package reflex.memorygame.com.reflex;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

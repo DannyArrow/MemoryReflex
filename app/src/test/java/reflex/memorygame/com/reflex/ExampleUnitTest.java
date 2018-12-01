@@ -1,4 +1,4 @@
-package reflex.buildappswithpaulo.com.reflex;
+package reflex.memorygame.com.reflex;
 
 import org.junit.Test;
 

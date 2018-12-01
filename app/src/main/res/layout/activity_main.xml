@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/wallpapar"
 
-    tools:context="reflex.buildappswithpaulo.com.reflex.MainActivity">
+    tools:context="reflex.memorygame.com.reflex.MainActivity">
 
     <TextView
         android:id="@+id/highScoreTextView"
